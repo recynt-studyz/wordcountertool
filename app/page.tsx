@@ -96,10 +96,10 @@ export default function HomePage() {
       {/* Hero section */}
       <div
         className="relative bg-cover bg-slate-800"
-        style={{ backgroundImage: "url('/herobgwct.webp')", backgroundPosition: 'center bottom' }}
+        style={{ backgroundImage: "url('/herobgwct.webp')", backgroundPosition: 'center 70%' }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/8 to-transparent" />
         {/* Bottom fade to white */}
         <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent to-white dark:to-slate-900" />
 

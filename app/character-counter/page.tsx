@@ -76,8 +76,8 @@ export default function CharacterCounterPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
-      <div className="relative bg-cover bg-slate-800" style={{ backgroundImage: "url('/herobgwct.webp')", backgroundPosition: 'center bottom' }}>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10" />
+      <div className="relative bg-cover bg-slate-800" style={{ backgroundImage: "url('/herobgwct.webp')", backgroundPosition: 'center 70%' }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/8 to-transparent" />
         <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent to-white dark:to-slate-900" />
         <div className="relative z-10">
           <ToolHeader />
