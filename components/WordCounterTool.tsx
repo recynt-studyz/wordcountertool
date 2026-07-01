@@ -33,13 +33,25 @@ function StatCard({
   color?: string
 }) {
   return (
-    <div className="bg-slate-50 dark:bg-slate-700/50 rounded-xl p-4 border border-slate-100 dark:border-slate-700">
-      <div className={`text-2xl font-bold truncate ${color ?? 'text-slate-900 dark:text-white'}`}>
+    <div className="bg-white dark:bg-slate-800 rounded-xl p-3 border border-slate-100 dark:border-slate-700">
+      <div className={`text-xl font-bold truncate leading-tight ${color ?? 'text-slate-900 dark:text-white'}`}>
         {value}
       </div>
-      <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-tight">{label}</div>
-      {sub && <div className={`text-xs mt-1 font-medium ${color ?? 'text-slate-500 dark:text-slate-400'}`}>{sub}</div>}
+      <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-tight">{label}</div>
+      {sub && (
+        <div className={`text-[11px] mt-0.5 font-medium ${color ?? 'text-slate-400 dark:text-slate-500'}`}>
+          {sub}
+        </div>
+      )}
     </div>
+  )
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">
+      {children}
+    </p>
   )
 }
 
@@ -91,7 +103,6 @@ export default function WordCounterTool() {
 
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  // Load word goal from localStorage
   useEffect(() => {
     try {
       const saved = localStorage.getItem('wordcountertool-goal')
@@ -145,13 +156,6 @@ export default function WordCounterTool() {
     }
   }
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragOver(true)
-  }
-
-  const handleDragLeave = () => setIsDragOver(false)
-
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault()
     setIsDragOver(false)
@@ -188,165 +192,246 @@ export default function WordCounterTool() {
   const selectedPlatform = selectedPlatformId
     ? PLATFORM_LIST.find(p => p.id === selectedPlatformId) ?? null
     : null
-  const platformPct = selectedPlatform
-    ? (charsWithSpaces / selectedPlatform.limit) * 100
-    : 0
+  const platformPct = selectedPlatform ? (charsWithSpaces / selectedPlatform.limit) * 100 : 0
   const goalPct = wordGoal > 0 ? Math.min(100, (wordCount / wordGoal) * 100) : 0
 
   return (
     <div className="space-y-6">
-      {/* Textarea section */}
-      <div className="relative">
-        {/* Toolbar */}
-        <div className="flex items-center gap-2 mb-2">
-          <button
-            onClick={() => setIsMonospace(v => !v)}
-            className={[
-              'text-xs px-3 py-1.5 rounded-lg border transition-colors font-medium',
-              isMonospace
-                ? 'bg-blue-600 text-white border-blue-600'
-                : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-blue-400',
-            ].join(' ')}
-          >
-            Monospace
-          </button>
-          <span className="text-xs text-slate-400 dark:text-slate-500 ml-auto">
-            Drop a .txt file to load
-          </span>
-          {text && (
+
+      {/* ── TWO-COLUMN ROW ── */}
+      <div className="flex flex-col md:flex-row md:items-start gap-6">
+
+        {/* ── LEFT COLUMN: Textarea (65%) ── */}
+        <div className="w-full min-w-0 md:flex-[65]">
+
+          {/* Toolbar */}
+          <div className="flex items-center gap-2 mb-2">
             <button
-              onClick={handleClear}
-              aria-label="Clear text"
-              className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-red-500 hover:border-red-300 transition-colors"
+              onClick={() => setIsMonospace(v => !v)}
+              className={[
+                'text-xs px-3 py-1.5 rounded-lg border transition-colors font-medium',
+                isMonospace
+                  ? 'bg-blue-600 text-white border-blue-600'
+                  : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-blue-400',
+              ].join(' ')}
             >
-              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-              Clear
+              Monospace
             </button>
-          )}
-        </div>
-
-        {/* Platform progress bar */}
-        {selectedPlatform && (
-          <div className="mb-3">
-            <div className="flex justify-between items-center mb-1">
-              <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
-                {selectedPlatform.name}
-              </span>
-              <span
-                className={`text-xs font-bold ${
-                  platformPct > 100
-                    ? 'text-red-600 dark:text-red-400'
-                    : platformPct >= 80
-                    ? 'text-yellow-600 dark:text-yellow-400'
-                    : 'text-slate-600 dark:text-slate-400'
-                }`}
+            <span className="text-xs text-slate-400 dark:text-slate-500 ml-auto hidden sm:block">
+              Drop a .txt file to load
+            </span>
+            {text && (
+              <button
+                onClick={handleClear}
+                aria-label="Clear text"
+                className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-red-500 hover:border-red-300 transition-colors"
               >
-                {charsWithSpaces.toLocaleString()} / {selectedPlatform.limit.toLocaleString()} chars
-                {platformPct > 100 && ' — Over limit!'}
-              </span>
-            </div>
-            <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-              <div
-                className={`h-full transition-all duration-150 rounded-full ${progressColor(platformPct)}`}
-                style={{ width: `${Math.min(100, platformPct)}%` }}
-              />
-            </div>
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Clear
+              </button>
+            )}
           </div>
-        )}
 
-        {/* Textarea */}
-        <div
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          className={[
-            'relative rounded-xl border-2 transition-colors',
-            isDragOver
-              ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20'
-              : 'border-slate-200 dark:border-slate-600',
-          ].join(' ')}
-        >
-          <textarea
-            ref={textareaRef}
-            value={text}
-            onChange={handleTextChange}
-            placeholder="Start typing or paste your text here..."
-            spellCheck
-            className={[
-              'w-full rounded-xl px-5 py-4 bg-[#FAFAFA] dark:bg-slate-800 text-slate-800 dark:text-slate-100',
-              'placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none resize-none',
-              'leading-relaxed transition-colors',
-              isMonospace ? 'font-mono text-sm' : 'font-sans text-base',
-            ].join(' ')}
-            style={{ minHeight: 300, lineHeight: 1.7 }}
-          />
-          {isDragOver && (
-            <div className="absolute inset-0 rounded-xl flex items-center justify-center pointer-events-none">
-              <div className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium shadow-lg">
-                Drop file to load
+          {/* Platform progress bar */}
+          {selectedPlatform && (
+            <div className="mb-3">
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
+                  {selectedPlatform.name}
+                </span>
+                <span
+                  className={`text-xs font-bold ${
+                    platformPct > 100
+                      ? 'text-red-600 dark:text-red-400'
+                      : platformPct >= 80
+                      ? 'text-yellow-600 dark:text-yellow-400'
+                      : 'text-slate-600 dark:text-slate-400'
+                  }`}
+                >
+                  {charsWithSpaces.toLocaleString()} / {selectedPlatform.limit.toLocaleString()} chars
+                  {platformPct > 100 && ' — Over limit!'}
+                </span>
+              </div>
+              <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                <div
+                  className={`h-full transition-all duration-150 rounded-full ${progressColor(platformPct)}`}
+                  style={{ width: `${Math.min(100, platformPct)}%` }}
+                />
               </div>
             </div>
           )}
+
+          {/* Textarea */}
+          <div
+            onDragOver={e => { e.preventDefault(); setIsDragOver(true) }}
+            onDragLeave={() => setIsDragOver(false)}
+            onDrop={handleDrop}
+            className={[
+              'relative rounded-xl border-2 transition-colors',
+              isDragOver
+                ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                : 'border-slate-200 dark:border-slate-600',
+            ].join(' ')}
+          >
+            <textarea
+              ref={textareaRef}
+              value={text}
+              onChange={handleTextChange}
+              placeholder="Start typing or paste your text here..."
+              spellCheck
+              className={[
+                'w-full rounded-xl px-5 py-4 bg-[#FAFAFA] dark:bg-slate-800 text-slate-800 dark:text-slate-100',
+                'placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none resize-none',
+                'leading-relaxed transition-colors',
+                isMonospace ? 'font-mono text-sm' : 'font-sans text-base',
+              ].join(' ')}
+              style={{ minHeight: 300, lineHeight: 1.7 }}
+            />
+            {isDragOver && (
+              <div className="absolute inset-0 rounded-xl flex items-center justify-center pointer-events-none">
+                <div className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium shadow-lg">
+                  Drop file to load
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ── RIGHT COLUMN: Sticky stats panel (35%) ── */}
+        <div className="w-full md:flex-[35] md:sticky md:top-4">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/60 p-4 space-y-4">
+
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+              Stats
+            </h2>
+
+            {/* Core counts — instant */}
+            <div>
+              <SectionLabel>Core</SectionLabel>
+              <div className="grid grid-cols-2 gap-2">
+                <StatCard label="Words" value={wordCount.toLocaleString()} />
+                <StatCard label="Sentences" value={sentences.toLocaleString()} />
+                <StatCard label="Chars (with spaces)" value={charsWithSpaces.toLocaleString()} />
+                <StatCard label="Chars (no spaces)" value={charsWithoutSpaces.toLocaleString()} />
+              </div>
+            </div>
+
+            {/* Extended — debounced */}
+            <div>
+              <SectionLabel>Time &amp; Structure</SectionLabel>
+              <div className="grid grid-cols-2 gap-2">
+                <StatCard label="Paragraphs" value={extStats.paragraphs.toLocaleString()} />
+                <StatCard label="Unique words" value={extStats.uniqueWords.toLocaleString()} />
+                <StatCard
+                  label="Reading time"
+                  value={extStats.readingTime === 0 ? '—' : `${extStats.readingTime} min`}
+                  sub="at 200 WPM"
+                />
+                <StatCard
+                  label="Speaking time"
+                  value={extStats.speakingTime === 0 ? '—' : `${extStats.speakingTime} min`}
+                  sub="at 130 WPM"
+                />
+              </div>
+            </div>
+
+            {/* Readability — debounced */}
+            <div>
+              <SectionLabel>Readability</SectionLabel>
+              <div className="grid grid-cols-2 gap-2">
+                <StatCard
+                  label="Flesch Ease"
+                  value={readability ? readability.fleschEase.toFixed(1) : '—'}
+                  sub={readability ? fleschLabel(readability.fleschEase) : undefined}
+                  color={readability ? fleschColor(readability.fleschEase) : undefined}
+                />
+                <StatCard
+                  label="FK Grade"
+                  value={readability ? `Gr. ${readability.fkGrade.toFixed(1)}` : '—'}
+                  sub={readability ? gradeLabel(readability.fkGrade) : undefined}
+                />
+                <StatCard
+                  label="Avg words / sent."
+                  value={readability ? readability.avgWordsPerSentence.toFixed(1) : '—'}
+                />
+                <StatCard
+                  label="Avg syl. / word"
+                  value={readability ? readability.avgSyllablesPerWord.toFixed(2) : '—'}
+                />
+              </div>
+            </div>
+
+            {/* Word Goal */}
+            <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
+              <SectionLabel>Word Goal</SectionLabel>
+              <form onSubmit={handleGoalSubmit} className="flex items-center gap-2 mb-3">
+                <input
+                  type="number"
+                  min="1"
+                  value={wordGoalInput}
+                  onChange={e => setWordGoalInput(e.target.value)}
+                  placeholder="e.g. 1000"
+                  className="w-full min-w-0 px-3 py-1.5 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button
+                  type="submit"
+                  className="shrink-0 px-3 py-1.5 text-sm rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors"
+                >
+                  Set
+                </button>
+                {wordGoal > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setWordGoal(0)
+                      setWordGoalInput('')
+                      try { localStorage.removeItem('wordcountertool-goal') } catch {}
+                    }}
+                    className="shrink-0 px-2 py-1.5 text-sm rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-red-500 hover:border-red-300 transition-colors"
+                    aria-label="Clear goal"
+                  >
+                    ✕
+                  </button>
+                )}
+              </form>
+
+              {wordGoal > 0 ? (
+                <div>
+                  <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1.5">
+                    <span>
+                      {wordCount.toLocaleString()} / {wordGoal.toLocaleString()} words
+                    </span>
+                    <span className="font-semibold">{goalPct.toFixed(1)}%</span>
+                  </div>
+                  <div className="h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-300 ${
+                        goalPct >= 100 ? 'bg-green-500' : goalPct >= 80 ? 'bg-blue-500' : 'bg-blue-400'
+                      }`}
+                      style={{ width: `${goalPct}%` }}
+                    />
+                  </div>
+                  {goalPct >= 100 && (
+                    <p className="text-xs text-green-600 dark:text-green-400 font-medium mt-1">
+                      Goal reached!
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <p className="text-xs text-slate-400 dark:text-slate-500">
+                  Set a target to track your progress
+                </p>
+              )}
+            </div>
+
+          </div>
         </div>
       </div>
+      {/* ── END TWO-COLUMN ROW ── */}
 
-      {/* Stats Dashboard */}
-      <div>
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
-          Stats
-        </h2>
-
-        {/* Row 1 — instant */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
-          <StatCard label="Words" value={wordCount.toLocaleString()} />
-          <StatCard label="Characters (with spaces)" value={charsWithSpaces.toLocaleString()} />
-          <StatCard label="Characters (no spaces)" value={charsWithoutSpaces.toLocaleString()} />
-          <StatCard label="Sentences" value={sentences.toLocaleString()} />
-        </div>
-
-        {/* Row 2 — debounced */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
-          <StatCard label="Paragraphs" value={extStats.paragraphs.toLocaleString()} />
-          <StatCard
-            label="Reading time"
-            value={extStats.readingTime === 0 ? '—' : `${extStats.readingTime} min`}
-            sub="at 200 WPM"
-          />
-          <StatCard
-            label="Speaking time"
-            value={extStats.speakingTime === 0 ? '—' : `${extStats.speakingTime} min`}
-            sub="at 130 WPM"
-          />
-          <StatCard label="Unique words" value={extStats.uniqueWords.toLocaleString()} />
-        </div>
-
-        {/* Row 3 — readability */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <StatCard
-            label="Flesch Reading Ease"
-            value={readability ? readability.fleschEase.toFixed(1) : '—'}
-            sub={readability ? fleschLabel(readability.fleschEase) : undefined}
-            color={readability ? fleschColor(readability.fleschEase) : undefined}
-          />
-          <StatCard
-            label="Flesch-Kincaid Grade"
-            value={readability ? `Grade ${readability.fkGrade.toFixed(1)}` : '—'}
-            sub={readability ? gradeLabel(readability.fkGrade) : undefined}
-          />
-          <StatCard
-            label="Avg words / sentence"
-            value={readability ? readability.avgWordsPerSentence.toFixed(1) : '—'}
-          />
-          <StatCard
-            label="Avg syllables / word"
-            value={readability ? readability.avgSyllablesPerWord.toFixed(2) : '—'}
-          />
-        </div>
-      </div>
-
-      {/* Platform Limits */}
+      {/* ── FULL WIDTH: Platform Limits ── */}
       <div>
         <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
           Platform Character Limits
@@ -359,9 +444,7 @@ export default function WordCounterTool() {
             return (
               <button
                 key={platform.id}
-                onClick={() =>
-                  setSelectedPlatformId(isSelected ? null : platform.id)
-                }
+                onClick={() => setSelectedPlatformId(isSelected ? null : platform.id)}
                 className={[
                   'flex-shrink-0 flex flex-col items-center px-4 py-2 rounded-xl border text-xs font-medium transition-all',
                   isSelected
@@ -385,7 +468,7 @@ export default function WordCounterTool() {
         </div>
       </div>
 
-      {/* Keyword Density accordion */}
+      {/* ── FULL WIDTH: Keyword Density accordion ── */}
       <div className="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
         <button
           onClick={() => setShowKeywords(v => !v)}
@@ -434,71 +517,6 @@ export default function WordCounterTool() {
         )}
       </div>
 
-      {/* Word Goal Tracker */}
-      <div className="border border-slate-200 dark:border-slate-700 rounded-xl p-5">
-        <div className="flex items-center gap-4 flex-wrap">
-          <span className="text-sm font-semibold text-slate-700 dark:text-slate-200 shrink-0">
-            Word Goal
-          </span>
-          <form onSubmit={handleGoalSubmit} className="flex items-center gap-2">
-            <input
-              type="number"
-              min="1"
-              value={wordGoalInput}
-              onChange={e => setWordGoalInput(e.target.value)}
-              placeholder="e.g. 1000"
-              className="w-28 px-3 py-1.5 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button
-              type="submit"
-              className="px-3 py-1.5 text-sm rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors"
-            >
-              Set
-            </button>
-            {wordGoal > 0 && (
-              <button
-                type="button"
-                onClick={() => {
-                  setWordGoal(0)
-                  setWordGoalInput('')
-                  try { localStorage.removeItem('wordcountertool-goal') } catch {}
-                }}
-                className="px-3 py-1.5 text-sm rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:text-red-500 hover:border-red-300 transition-colors"
-              >
-                Clear
-              </button>
-            )}
-          </form>
-        </div>
-
-        {wordGoal > 0 && (
-          <div className="mt-4">
-            <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1">
-              <span>
-                {wordCount.toLocaleString()} / {wordGoal.toLocaleString()} words
-              </span>
-              <span className="font-semibold">{goalPct.toFixed(1)}%</span>
-            </div>
-            <div className="h-3 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
-              <div
-                className={`h-full rounded-full transition-all duration-300 ${
-                  goalPct >= 100
-                    ? 'bg-green-500'
-                    : goalPct >= 80
-                    ? 'bg-blue-500'
-                    : 'bg-blue-400'
-                }`}
-                style={{ width: `${goalPct}%` }}
-              />
-            </div>
-            {goalPct >= 100 && (
-              <p className="text-xs text-green-600 dark:text-green-400 font-medium mt-1">
-                Goal reached!
-              </p>
-            )}
-          </div>
-        )}
-      </div>
     </div>
   )
 }
