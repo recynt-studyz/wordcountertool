@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const size = { width: 32, height: 32 }
+export const size = { width: 48, height: 48 }
 export const contentType = 'image/png'
 
 export default function Icon() {
@@ -8,31 +8,49 @@ export default function Icon() {
     (
       <div
         style={{
-          background: '#2563EB',
-          borderRadius: '7px',
-          width: '100%',
-          height: '100%',
+          width: 48,
+          height: 48,
+          borderRadius: 10,
+          background: 'linear-gradient(135deg, #1d4ed8, #2563EB)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          flexDirection: 'column',
         }}
       >
-        <div
-          style={{
-            color: 'white',
-            fontFamily: 'sans-serif',
-            fontWeight: 900,
-            fontSize: '18px',
-            lineHeight: 1,
-            paddingBottom: '2px',
-            borderBottom: '2px solid rgba(255,255,255,0.8)',
-          }}
-        >
-          W
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 4,
+          padding: '0 8px',
+        }}>
+          {/* Three text lines of varying width */}
+          <div style={{
+            height: 3,
+            width: 28,
+            borderRadius: 2,
+            background: 'white',
+          }} />
+          <div style={{
+            height: 3,
+            width: 22,
+            borderRadius: 2,
+            background: 'rgba(255,255,255,0.8)',
+          }} />
+          <div style={{
+            height: 3,
+            width: 26,
+            borderRadius: 2,
+            background: 'white',
+          }} />
+          <div style={{
+            height: 3,
+            width: 16,
+            borderRadius: 2,
+            background: 'rgba(255,255,255,0.6)',
+          }} />
         </div>
       </div>
     ),
-    { ...size },
+    { ...size }
   )
 }
