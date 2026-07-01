@@ -102,7 +102,10 @@ export default function WordCounterTool() {
   const [keywords, setKeywords] = useState<KeywordItem[]>([])
 
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const toolbarRef = useRef<HTMLDivElement>(null)
+  const statsPanelRef = useRef<HTMLDivElement>(null)
 
+  // Load word goal from localStorage
   useEffect(() => {
     try {
       const saved = localStorage.getItem('wordcountertool-goal')
@@ -114,6 +117,37 @@ export default function WordCounterTool() {
         }
       }
     } catch {}
+  }, [])
+
+  // Sync textarea min-height to match the stats panel on desktop
+  useEffect(() => {
+    const syncHeight = () => {
+      const ta = textareaRef.current
+      const panel = statsPanelRef.current
+      if (!ta || !panel) return
+      if (window.innerWidth >= 768) {
+        const toolbarH = toolbarRef.current?.offsetHeight ?? 44
+        // 8px = mb-2 gap between toolbar and textarea border div
+        const newMin = Math.max(300, panel.offsetHeight - toolbarH - 8)
+        ta.style.minHeight = `${newMin}px`
+        // If current height is less than new minimum, grow it
+        if ((parseInt(ta.style.height || '0', 10) || 0) < newMin) {
+          ta.style.height = `${newMin}px`
+        }
+      } else {
+        ta.style.minHeight = '300px'
+      }
+    }
+
+    syncHeight()
+
+    const ro = new ResizeObserver(syncHeight)
+    if (statsPanelRef.current) ro.observe(statsPanelRef.current)
+    window.addEventListener('resize', syncHeight)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', syncHeight)
+    }
   }, [])
 
   // Instant stats
@@ -138,9 +172,11 @@ export default function WordCounterTool() {
     return () => clearTimeout(timer)
   }, [text])
 
+  // Auto-resize respects the dynamic min-height set by the ResizeObserver effect
   const autoResize = useCallback((ta: HTMLTextAreaElement) => {
     ta.style.height = 'auto'
-    ta.style.height = `${Math.max(300, ta.scrollHeight)}px`
+    const minH = parseInt(ta.style.minHeight || '300', 10) || 300
+    ta.style.height = `${Math.max(minH, ta.scrollHeight)}px`
   }, [])
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -151,7 +187,8 @@ export default function WordCounterTool() {
   const handleClear = () => {
     setText('')
     if (textareaRef.current) {
-      textareaRef.current.style.height = '300px'
+      const minH = parseInt(textareaRef.current.style.minHeight || '300', 10) || 300
+      textareaRef.current.style.height = `${minH}px`
       textareaRef.current.focus()
     }
   }
@@ -202,10 +239,10 @@ export default function WordCounterTool() {
       <div className="flex flex-col md:flex-row md:items-start gap-6">
 
         {/* ── LEFT COLUMN: Textarea (65%) ── */}
-        <div className="w-full min-w-0 md:flex-[65]">
+        <div className="w-full min-w-0 md:flex-[65] flex flex-col">
 
           {/* Toolbar */}
-          <div className="flex items-center gap-2 mb-2">
+          <div ref={toolbarRef} className="flex items-center gap-2 mb-2">
             <button
               onClick={() => setIsMonospace(v => !v)}
               className={[
@@ -236,7 +273,7 @@ export default function WordCounterTool() {
 
           {/* Platform progress bar */}
           {selectedPlatform && (
-            <div className="mb-3">
+            <div className="mb-2">
               <div className="flex justify-between items-center mb-1">
                 <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
                   {selectedPlatform.name}
@@ -254,7 +291,7 @@ export default function WordCounterTool() {
                   {platformPct > 100 && ' — Over limit!'}
                 </span>
               </div>
-              <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+              <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden mb-2">
                 <div
                   className={`h-full transition-all duration-150 rounded-full ${progressColor(platformPct)}`}
                   style={{ width: `${Math.min(100, platformPct)}%` }}
@@ -269,7 +306,7 @@ export default function WordCounterTool() {
             onDragLeave={() => setIsDragOver(false)}
             onDrop={handleDrop}
             className={[
-              'relative rounded-xl border-2 transition-colors',
+              'relative rounded-xl border-2 transition-colors flex-1',
               isDragOver
                 ? 'border-blue-400 bg-blue-50 dark:bg-blue-900/20'
                 : 'border-slate-200 dark:border-slate-600',
@@ -282,7 +319,7 @@ export default function WordCounterTool() {
               placeholder="Start typing or paste your text here..."
               spellCheck
               className={[
-                'w-full rounded-xl px-5 py-4 bg-[#FAFAFA] dark:bg-slate-800 text-slate-800 dark:text-slate-100',
+                'w-full h-full rounded-xl px-5 py-4 bg-[#FAFAFA] dark:bg-slate-800 text-slate-800 dark:text-slate-100',
                 'placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none resize-none',
                 'leading-relaxed transition-colors',
                 isMonospace ? 'font-mono text-sm' : 'font-sans text-base',
@@ -301,8 +338,10 @@ export default function WordCounterTool() {
 
         {/* ── RIGHT COLUMN: Sticky stats panel (35%) ── */}
         <div className="w-full md:flex-[35] md:sticky md:top-4">
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/60 p-4 space-y-4">
-
+          <div
+            ref={statsPanelRef}
+            className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/60 p-4 space-y-4"
+          >
             <h2 className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
               Stats
             </h2>
@@ -400,9 +439,7 @@ export default function WordCounterTool() {
               {wordGoal > 0 ? (
                 <div>
                   <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1.5">
-                    <span>
-                      {wordCount.toLocaleString()} / {wordGoal.toLocaleString()} words
-                    </span>
+                    <span>{wordCount.toLocaleString()} / {wordGoal.toLocaleString()} words</span>
                     <span className="font-semibold">{goalPct.toFixed(1)}%</span>
                   </div>
                   <div className="h-2.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
