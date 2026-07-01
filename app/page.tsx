@@ -99,7 +99,7 @@ export default function HomePage() {
         style={{ backgroundImage: "url('/herobgwct.webp')", backgroundPosition: 'center 70%' }}
       >
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/8 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10" />
         {/* Bottom fade to white */}
         <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent to-white dark:to-slate-900" />
 
