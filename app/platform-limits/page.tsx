@@ -97,7 +97,7 @@ export default function PlatformLimitsPage() {
         </div>
         <div className="mt-6 text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
           <p>
-            This free <strong>character limits</strong> checker shows your content length against all major <strong>social media limits</strong> simultaneously. Perfect for content marketers and social media managers who need to check multiple platforms at once.
+            This free <strong>character limits</strong> checker shows your content length against all major <strong>social media limits</strong> simultaneously. All processing happens in your browser — nothing is sent to any server. Perfect for content marketers and social media managers who need to check multiple platforms at once.
           </p>
         </div>
       </main>

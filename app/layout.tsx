@@ -62,7 +62,7 @@ export default function RootLayout({
         {/* Dark mode init — must run before paint to avoid flash */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('wordcountertool-theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
+            __html: `(function(){try{if(localStorage.getItem('wordcountertool-theme')==='dark'){document.documentElement.classList.add('dark')}}catch(e){}})()`,
           }}
         />
       </head>
