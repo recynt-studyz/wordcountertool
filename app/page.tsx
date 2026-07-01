@@ -96,7 +96,7 @@ export default function HomePage() {
       {/* Hero section */}
       <div
         className="relative bg-cover bg-center bg-slate-800"
-        style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+        style={{ backgroundImage: "url('/herobgwct.webp')" }}
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10" />

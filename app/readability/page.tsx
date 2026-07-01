@@ -76,8 +76,9 @@ export default function ReadabilityPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
-      <div className="relative bg-blue-900">
-        <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-b from-transparent to-white dark:to-slate-900" />
+      <div className="relative bg-cover bg-center bg-slate-800" style={{ backgroundImage: "url('/herobgwct.webp')" }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/10" />
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-b from-transparent to-white dark:to-slate-900" />
         <div className="relative z-10">
           <ToolHeader />
           <div className="max-w-5xl mx-auto px-4 pt-6 pb-20 text-center text-white">
