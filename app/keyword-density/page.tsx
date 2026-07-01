@@ -86,6 +86,14 @@ export default function KeywordDensityPage() {
             <p className="text-white/80 text-base md:text-lg max-w-xl mx-auto">
               Analyze <strong className="text-white">keyword density</strong> for SEO. Check single keywords, bigrams and trigrams. Free <strong className="text-white">SEO keyword analysis</strong> tool.
             </p>
+            <div className="flex justify-center mt-4">
+              <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/90 bg-black/60 backdrop-blur-sm rounded-xl px-6 py-3 shadow-lg shadow-black/40">
+                <span className="flex items-center gap-1.5"><span>&#128274;</span><span>Private <span className="hidden sm:inline text-white/60">— your text never leaves your browser</span></span></span>
+                <span className="flex items-center gap-1.5"><span>&#9889;</span> Instant</span>
+                <span className="flex items-center gap-1.5"><span>&#8734;</span> Unlimited</span>
+                <span className="flex items-center gap-1.5"><span>&#10003;</span> Free</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
