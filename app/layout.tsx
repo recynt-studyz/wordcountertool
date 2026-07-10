@@ -45,7 +45,7 @@ export const metadata: Metadata = {
       'Free online word counter with character count, readability scores, keyword density, reading time, and platform character limits. Instant, private, no signup.',
   },
   other: {
-    'google-adsense-account': 'ca-pub-8792838105001561',
+    'google-adsense-account': 'ca-pub-5035661017594256',
   },
   verification: {
     google: 'PLACEHOLDER_GOOGLE_SITE_VERIFICATION',
@@ -58,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
-        <meta name="google-adsense-account" content="ca-pub-8792838105001561" />
+        <meta name="google-adsense-account" content="ca-pub-5035661017594256" />
         {/* Dark mode init — must run before paint to avoid flash */}
         <script
           dangerouslySetInnerHTML={{
@@ -70,7 +70,7 @@ export default function RootLayout({
         {children}
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8792838105001561"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5035661017594256"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
