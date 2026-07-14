@@ -65,6 +65,18 @@ export default function RootLayout({
             __html: `(function(){try{if(localStorage.getItem('wordcountertool-theme')==='dark'){document.documentElement.classList.add('dark')}}catch(e){}})()`,
           }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-R3L9MFXH23"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-R3L9MFXH23');
+          `}
+        </Script>
       </head>
       <body className="min-h-screen flex flex-col bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans">
         {children}
