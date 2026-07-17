@@ -109,6 +109,101 @@ export default function KeywordDensityPage() {
             Use this free <strong>keyword density</strong> tool for <strong>SEO keyword analysis</strong>. Analyze your content for keyword frequency, multi-word phrases, and target keyword prominence — 100% private, nothing is sent to any server.
           </p>
         </div>
+
+        <div className="mt-10 prose prose-slate dark:prose-invert max-w-none">
+          <h2>How Keyword Density Is Calculated</h2>
+          <p>
+            Keyword density measures how frequently a keyword or phrase appears in your text relative to
+            the total word count. The formula is: keyword density (%) = (keyword occurrences ÷ total
+            words) × 100. If "content marketing" appears 10 times in a 500-word article, its density
+            is 2% (10 ÷ 500 × 100).
+          </p>
+          <p>
+            This tool displays keyword density across three levels:
+          </p>
+          <ul>
+            <li><strong>Single keywords:</strong> the top 20 most frequent individual words, after filtering out common stop words (the, a, and, of, to, etc.)</li>
+            <li><strong>Bigrams:</strong> the top 20 most frequent two-word phrases</li>
+            <li><strong>Trigrams:</strong> the top 20 most frequent three-word phrases</li>
+          </ul>
+          <p>
+            <strong>What is the ideal keyword density for SEO?</strong> Most SEO practitioners recommend
+            keeping your primary keyword at 0.5–2% density. Below 0.5%, the topic may appear undercovered
+            to search engines. Above 3%, the repetition becomes noticeable to readers and may trigger
+            Google's quality filters for keyword stuffing. The safest approach is natural writing — if
+            a keyword appears at a density that feels forced to a human reader, it is almost certainly
+            too high.
+          </p>
+          <p>
+            <strong>TF-IDF vs. keyword density:</strong> Modern search engines use TF-IDF (Term
+            Frequency–Inverse Document Frequency) rather than raw density. TF-IDF weighs how often a
+            term appears in your document against how often it appears across all documents on the web.
+            A word that appears frequently in your text but rarely across the wider web carries more
+            topical signal than a common word with similar frequency. Keyword density is a simplified
+            proxy for this relationship; TF-IDF is the underlying mechanism search engines actually use.
+          </p>
+          <p>
+            <strong>Keyword placement matters more than density.</strong> A keyword appearing in your
+            H1, opening paragraph, and subheadings signals relevance more strongly than the same keyword
+            clustered in one section mid-article. This tool shows whether your target keyword appears in
+            the first 100 words, which is the most important placement signal for on-page SEO.
+          </p>
+
+          <h2>Example: Fixing Keyword Distribution in an SEO Article</h2>
+          <p>
+            An SEO writer is optimizing a page targeting the phrase "best running shoes for flat feet."
+            She pastes her 900-word draft and enters the target phrase in the keyword input. The analysis
+            shows:
+          </p>
+          <ul>
+            <li>"running shoes" (bigram): appears 11 times — density 2.44%</li>
+            <li>"flat feet" (bigram): appears 6 times — density 1.33%</li>
+            <li>"best running shoes" (trigram): appears 4 times — density 0.89%</li>
+          </ul>
+          <p>
+            The bigram "running shoes" at 11 occurrences in 900 words means it appears roughly every
+            82 words — noticeable to a reader. More concerning, checking the distribution shows 7 of the
+            11 occurrences in the first 300 words. The back half of the article uses the phrase only 4
+            times, making the keyword placement pattern look unnatural.
+          </p>
+          <p>
+            She redistributes the keyword usage and introduces natural synonyms: "trail runners," "athletic
+            footwear," "stability shoes," and "motion control sneakers." After revision, "running shoes"
+            appears 7 times with even distribution across the article. She then checks the trigram results
+            and notices "motion control shoes" and "arch support insoles" appearing as new topical clusters
+            — subtopics she had not fully addressed. She expands those sections by 200 words, strengthening
+            the topical authority of the page without forcing any single phrase higher.
+          </p>
+
+          <h2>Key Factors in Keyword Analysis</h2>
+          <p>
+            <strong>Stop words are filtered out.</strong> Common words like "the," "a," "and," "of," "to,"
+            and "in" are excluded from keyword analysis because they appear in virtually every piece of
+            content and carry no SEO signal. The analysis surfaces only meaningful content terms, making
+            it easier to spot genuine topical patterns in your writing.
+          </p>
+          <p>
+            <strong>Keyword variations count separately.</strong> "Running shoe," "running shoes," and
+            "best running shoes" are three distinct phrases in this analysis. Google's natural language
+            processing understands them as related, but tracking them independently lets you see exactly
+            how each variant is distributed — which is more actionable than aggregating them into a single
+            number.
+          </p>
+          <p>
+            <strong>LSI keywords</strong> (Latent Semantic Indexing terms) are topically related words
+            Google expects to see in content on a given subject. A page about "coffee brewing" should
+            naturally include "beans," "grind," "extraction," "temperature," and "flavor." The keyword
+            density results can reveal LSI gaps: if expected related terms are absent from your top
+            keywords, your content may appear thin on a subtopic that competitors cover more thoroughly.
+          </p>
+          <p>
+            <strong>Keyword stuffing is penalized.</strong> Google's guidelines explicitly address
+            keyword stuffing — unnaturally repeating keywords to manipulate rankings — as a quality
+            violation. A density above 5–7% for any single term is a reliable indicator that the text
+            has been optimized for search engines rather than readers, and Google's quality systems treat
+            it accordingly. The 0.5–2% range stays comfortably within natural writing patterns.
+          </p>
+        </div>
       </main>
 
       <AdBanner />

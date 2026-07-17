@@ -71,12 +71,67 @@ export default function PrivacyPage() {
 
           <h2>Analytics</h2>
           <p>
-            We may use anonymous, aggregated analytics (page views, country of origin) provided by our hosting platform. No personally identifiable information is collected.
+            wordcountertool.app uses Google Analytics 4 (GA4) to collect anonymous, aggregated usage
+            data. GA4 tracks page views, session duration, general geographic region (country level),
+            device type, and browser type. It does not receive, process, or store any text you enter
+            into the tools. No personally identifiable information is collected or transmitted through
+            GA4.
+          </p>
+          <p>
+            Google Analytics uses cookies to distinguish returning visitors from new ones and to
+            aggregate usage patterns across sessions. You can opt out of Google Analytics tracking by
+            installing the{' '}
+            <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">
+              Google Analytics Opt-out Browser Add-on
+            </a>
+            .
+          </p>
+
+          <h2>AdSense and Advertising Cookies</h2>
+          <p>
+            wordcountertool.app displays ads served by Google AdSense (publisher ID: ca-pub-5035661017594256).
+            Google uses cookies to serve ads based on your prior visits to this website and to other
+            sites across the web. These cookies allow Google to personalize ad content based on your
+            browsing history.
+          </p>
+          <p>
+            You can opt out of personalized advertising at any time by visiting{' '}
+            <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">
+              Google Ads Settings
+            </a>
+            . You can also opt out of third-party vendor advertising cookies through the{' '}
+            <a href="https://www.networkadvertising.org/choices/" target="_blank" rel="noopener noreferrer">
+              Network Advertising Initiative opt-out page
+            </a>
+            .
+          </p>
+
+          <h2>GDPR and CCPA</h2>
+          <p>
+            If you are located in the European Economic Area (EEA) or the United Kingdom, you have
+            rights under the General Data Protection Regulation (GDPR) regarding any personal data that
+            may be processed about you, including the right to access, correct, or request deletion of
+            that data. Because wordcountertool.app does not collect or store personal data directly,
+            the primary data processor you may interact with is Google (via Analytics and AdSense). You
+            can review Google's privacy practices at{' '}
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+              policies.google.com/privacy
+            </a>
+            .
+          </p>
+          <p>
+            If you are a California resident, the California Consumer Privacy Act (CCPA) provides you
+            with the right to know what personal information is collected about you and the right to
+            opt out of the sale of personal information. wordcountertool.app does not sell personal
+            information. The only third-party data processing occurs through Google Analytics and Google
+            AdSense, both of which provide opt-out mechanisms described above.
           </p>
 
           <h2>Contact</h2>
           <p>
-            If you have questions about this privacy policy, please use the Contact link in the footer.
+            If you have questions about this privacy policy or about how your data is handled, please
+            use the Contact link in the footer. We aim to respond to all privacy inquiries within 5
+            business days.
           </p>
 
           <p className="text-sm text-slate-400">Last updated: June 2026</p>

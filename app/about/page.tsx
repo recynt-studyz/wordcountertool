@@ -59,9 +59,52 @@ export default function AboutPage() {
             Just paste your text and get answers.
           </p>
 
+          <h2>Who Benefits from wordcountertool.app</h2>
+          <p>
+            The tools here were built around the needs of people who work with text professionally:
+          </p>
+          <ul>
+            <li><strong>Writers and authors</strong> — track word count against assignment requirements, check reading time before submitting long-form work, and monitor keyword density in content marketing pieces.</li>
+            <li><strong>Students and academics</strong> — confirm essays and research papers meet minimum and maximum word count requirements before submission. Check readability scores against assignment guidelines that specify grade level targets.</li>
+            <li><strong>SEO professionals and bloggers</strong> — analyze keyword density to stay in the 0.5–2% range, check bigram and trigram distribution, and identify topical gaps in content before publishing.</li>
+            <li><strong>Social media managers and content marketers</strong> — verify character counts against Twitter, Instagram, LinkedIn, TikTok, and SMS limits simultaneously, so one message can be adapted across platforms efficiently.</li>
+            <li><strong>Journalists and editors</strong> — trim copy to column-inch word budgets and check readability scores for audience alignment.</li>
+            <li><strong>Speakers and educators</strong> — use speaking time estimates to plan presentations, lectures, and recorded content that fits a given time slot.</li>
+          </ul>
+
+          <h2>What Makes Each Tool Useful</h2>
+          <p>
+            The <Link href="/">Word Counter</Link> goes beyond a simple word count: it shows character
+            count, sentence count, paragraph count, estimated reading time, speaking time, Flesch Reading
+            Ease score, keyword density, and platform character limits — all from a single paste. Most
+            word counters show one or two of these; this tool shows all of them at once.
+          </p>
+          <p>
+            The <Link href="/readability">Readability Checker</Link> runs five separate formulas —
+            Flesch Reading Ease, Flesch-Kincaid Grade Level, Gunning Fog, Coleman-Liau, and SMOG — and
+            shows them side by side. Different formulas are preferred in different contexts (SMOG for
+            healthcare, Gunning Fog for business writing, Flesch for general web content), so showing
+            all five lets you pick the metric most relevant to your audience.
+          </p>
+          <p>
+            The <Link href="/keyword-density">Keyword Density Checker</Link> analyzes single keywords,
+            bigrams (two-word phrases), and trigrams (three-word phrases) simultaneously, and shows
+            whether your target keyword appears in the first 100 words — the most important placement
+            signal for on-page SEO.
+          </p>
+          <p>
+            The <Link href="/platform-limits">Platform Limits Checker</Link> compares your text against
+            every major platform's character limit in a single table view, so you can see at a glance
+            which platforms need a shorter version of your message before you start rewriting.
+          </p>
+
           <h2>Privacy</h2>
           <p>
-            Your writing is yours. Nothing you type is ever sent anywhere. Read the full <Link href="/privacy">Privacy Policy</Link>.
+            Your writing is yours. Nothing you type is ever sent anywhere. All text processing — word
+            counting, character counting, readability scoring, keyword analysis, reading time calculation
+            — runs entirely in your browser using native JavaScript. There is no backend server that
+            receives your content, no database that stores it, and no way for anyone at wordcountertool.app
+            to see what you write. Read the full <Link href="/privacy">Privacy Policy</Link>.
           </p>
         </div>
       </main>

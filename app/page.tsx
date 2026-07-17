@@ -147,6 +147,88 @@ export default function HomePage() {
             completely private.
           </p>
         </div>
+
+        <div className="mt-10 prose prose-slate dark:prose-invert max-w-none">
+          <h2>How the Word Counter Works</h2>
+          <p>
+            This tool counts words by splitting your text on whitespace and counting each resulting
+            token. Any sequence of non-whitespace characters separated by spaces, tabs, or line breaks
+            counts as one word. A contraction like "don't" counts as one word. A hyphenated compound
+            like "state-of-the-art" counts as one word. A bare number like "42,000" counts as one word.
+            URLs count as one word regardless of length.
+          </p>
+          <p>
+            Character counts come in two forms. <em>With spaces</em> counts every character in your
+            text — spaces, tabs, and newlines included — and this is the figure most platforms use when
+            enforcing character limits. <em>Without spaces</em> strips all whitespace first and counts
+            only the visible, non-whitespace characters.
+          </p>
+          <p>
+            Sentence detection splits on sentence-ending punctuation — periods, exclamation marks, and
+            question marks — then counts segments that contain at least one non-whitespace character. An
+            ellipsis is treated as one sentence boundary, not three. Paragraph counting is simpler: any
+            block of text separated by at least one blank line registers as a separate paragraph.
+          </p>
+          <p>
+            <strong>Why counts differ between tools:</strong> Microsoft Word and Google Docs handle edge
+            cases differently. Word can treat "well-known" as two words; Google Docs typically counts it
+            as one. Some tools strip punctuation before counting; others do not. A discrepancy of five to
+            ten words between this counter and your word processor almost always comes down to hyphenation
+            handling and URL treatment.
+          </p>
+
+          <h2>Example: From Over-Limit Draft to Submission-Ready Article</h2>
+          <p>
+            A freelance writer receives a 1,500-word article assignment from a content marketing agency.
+            She drafts the piece and pastes it here before submitting. The counter reads: 1,623 words,
+            9,841 characters with spaces, 31 sentences, 8 paragraphs. She is 123 words over the limit.
+          </p>
+          <p>
+            She opens the keyword density section and finds the phrase "content marketing" appearing 18
+            times in her 1,623-word draft — a density of 2.2%. Her client brief specified keeping the
+            primary phrase under 2%. The bigram analysis also shows "digital marketing" at 11 occurrences
+            and "marketing strategy" at 9. The topic cluster is dense throughout.
+          </p>
+          <p>
+            She starts editing: cutting redundant transitions, tightening wordy phrases ("in order to"
+            becomes "to"; "due to the fact that" becomes "because"), and removing a tangential section
+            on industry history. After two passes, the counter reads 1,497 words and "content marketing"
+            sits at 1.7% density. She submits on time and within spec.
+          </p>
+          <p>
+            The same workflow applies across roles. <strong>Students</strong> paste essay drafts before
+            submission to confirm they meet minimum and maximum word requirements. <strong>SEO
+            writers</strong> keep primary keywords in the 0.5–2% density range to avoid over-optimization
+            penalties. <strong>Journalists</strong> trim to column-inch word budgets before filing copy.
+            <strong> Social media managers</strong> verify character counts against Twitter, LinkedIn, and
+            Instagram limits before scheduling posts.
+          </p>
+
+          <h2>What Affects Your Word Count</h2>
+          <p>
+            A few elements shift word count in ways that can catch writers off guard:
+          </p>
+          <ul>
+            <li><strong>Hyphenated compounds</strong> count as one word — "state-of-the-art" = 1, not 4.</li>
+            <li><strong>Contractions</strong> count as one word — "don't," "it's," and "they're" each = 1.</li>
+            <li><strong>Numbers</strong> count as one word regardless of size or formatting — "100,000" = 1.</li>
+            <li><strong>URLs</strong> count as one word, no matter how long they are.</li>
+            <li><strong>Attached punctuation</strong> is part of its word token — a trailing comma or period does not count separately.</li>
+          </ul>
+          <p>
+            <strong>Character count</strong> is essential for platform publishing. Twitter limits posts to
+            280 characters. SMS messages break at 160 characters. Instagram captions allow 2,200 characters
+            but only surface the first 125 before a "more" tap is required. Knowing your exact character
+            count before you post prevents a mid-sentence cutoff after the fact.
+          </p>
+          <p>
+            <strong>Reading time</strong> is estimated at 200 words per minute — the median silent reading
+            speed for adult non-fiction readers, drawn from research by Brysbaert (2019) covering 190
+            studies and more than 17,000 participants. Fast readers average 300 WPM; readers working
+            through technical or unfamiliar content average closer to 150 WPM. The 200 WPM default
+            produces a conservative estimate that applies broadly across audiences.
+          </p>
+        </div>
       </main>
 
       {/* AdBanner 2 */}

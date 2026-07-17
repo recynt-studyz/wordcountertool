@@ -109,6 +109,98 @@ export default function PlatformLimitsPage() {
             This free <strong>character limits</strong> checker shows your content length against all major <strong>social media limits</strong> simultaneously. All processing happens in your browser — nothing is sent to any server. Perfect for content marketers and social media managers who need to check multiple platforms at once.
           </p>
         </div>
+
+        <div className="mt-10 prose prose-slate dark:prose-invert max-w-none">
+          <h2>Why Social Platforms Have Different Character Limits</h2>
+          <p>
+            Every major social platform enforces character limits as a deliberate product decision that
+            shapes the type of content users create, read, and share. These limits reflect each platform's
+            core use case: quick updates, professional commentary, short-form video captions, or
+            long-form storytelling.
+          </p>
+          <p>
+            <strong>Twitter/X — 280 characters:</strong> Twitter launched in 2006 with a 140-character
+            limit derived from SMS. Standard SMS messages hold 160 characters, and Twitter's founders
+            reserved 20 characters for the sender's username. In 2017, Twitter doubled the limit to 280
+            after data showed non-English speakers — who could express more complex ideas in fewer
+            characters in their languages — were hitting the ceiling far less often than English speakers,
+            creating an unequal experience. The 280-character limit fits roughly 40–50 English words.
+          </p>
+          <p>
+            <strong>SMS — 160 characters:</strong> The 160-character SMS limit dates to 1985, when
+            German researcher Friedhelm Hillebrand sat at his typewriter and typed random sentences,
+            questions, and directives to test how long typical human messages were. He found that nearly
+            all of them fit within 160 characters — a surprisingly consistent finding that was later
+            incorporated into the GSM standard and has governed text messaging ever since.
+          </p>
+          <p>
+            <strong>Instagram — 2,200 characters (captions), 150 characters (bio):</strong> Instagram's
+            longer caption limit supports storytelling, multi-hashtag strategies, and engagement tactics
+            that require more than a sentence. However, only the first 125 characters appear in the feed
+            before a "more" tap is required, making the effective above-the-fold limit much shorter.
+          </p>
+          <p>
+            <strong>LinkedIn — 3,000 characters (posts), 220 characters (headline):</strong> LinkedIn's
+            higher limit reflects its professional context. Longer posts covering industry analysis,
+            career lessons, and thought leadership perform well on the platform. The first 200–250
+            characters show in the feed before a "see more" truncation.
+          </p>
+
+          <h2>Example: One Message Adapted for Six Platforms</h2>
+          <p>
+            A content marketing manager at a software company needs to announce a new product integration.
+            She writes a core message: 230 characters. She pastes it into the platform limits checker and
+            reviews the results across all platforms simultaneously:
+          </p>
+          <ul>
+            <li><strong>Twitter/X (280):</strong> Fits with 50 characters to spare — she adds a second hashtag.</li>
+            <li><strong>Instagram caption (2,200):</strong> Fits easily — she expands with a three-paragraph story about the partnership, reaching 480 characters.</li>
+            <li><strong>LinkedIn post (3,000):</strong> She writes a professional version at 620 characters with a personal note about why the integration matters to the team.</li>
+            <li><strong>Facebook post (63,206):</strong> No constraint — she uses the full LinkedIn version.</li>
+            <li><strong>TikTok caption (2,200):</strong> Full Instagram version fits without changes.</li>
+            <li><strong>SMS marketing (160):</strong> The 230-character original is too long. She creates a separate 88-character version with a shortened URL.</li>
+          </ul>
+          <p>
+            One core message becomes five distinct platform-optimized variants. The simultaneous comparison
+            view makes it immediately clear which platforms require a rewrite versus which can use the
+            original or an expanded version.
+          </p>
+          <p>
+            The same workflow applies for meta descriptions (ideal: 120–158 characters), YouTube
+            descriptions (5,000-character limit, but most viewers see only the first 157 before "show
+            more"), and email subject lines (50–60 characters to display fully in most email clients).
+          </p>
+
+          <h2>Key Factors When Working With Platform Limits</h2>
+          <p>
+            <strong>Hashtags and mentions count as characters.</strong> On Twitter, "#marketing" is 10
+            characters and "@brandname" counts at full character length. A post with three hashtags and
+            two mentions can consume 60–80 characters before a single word of the main message is written.
+            Plan your character budget with these elements included.
+          </p>
+          <p>
+            <strong>URL treatment varies by platform.</strong> Twitter shortens all URLs to exactly 23
+            characters via its t.co shortener, regardless of the original URL length. On Instagram, links
+            in captions are not clickable, so the URL length counts in full but provides no value — most
+            creators use "link in bio" instead of pasting a URL. LinkedIn renders a link preview card
+            but still counts the URL toward the character limit.
+          </p>
+          <p>
+            <strong>Emoji count differently on some platforms.</strong> Most platforms count emoji as
+            2 characters due to Unicode encoding. Compound emoji assembled with Zero Width Joiners —
+            such as family group emoji — can register as 6–16 characters on platforms using older
+            Unicode counting methods. If emoji are central to your post, verify the count on the
+            platform directly after checking here.
+          </p>
+          <p>
+            <strong>Line breaks affect formatting behavior differently.</strong> LinkedIn treats line
+            breaks as significant for visual formatting, and posts with line breaks between short
+            paragraphs perform better for readability in the feed. Twitter converts multiple line
+            breaks to single breaks. Instagram preserves line breaks in the full caption view but not
+            in the truncated preview, which can make hashtag blocks appear at the wrong place if you
+            are not careful about line break placement.
+          </p>
+        </div>
       </main>
 
       <AdBanner />
